@@ -8,15 +8,17 @@ services:
       - MYSQL_DATABASE=fastapi
 
   fastapi_mini_app:
+    depends_on:
+        - db
     build: .
+    restart: always
     environment:
       - DB_HOST=db
       - DB_NAME=fastapi
       - DB_PASS=your_password
       - DB_PORT=3306
       - DB_USER=fastapi
-    depends_on:
-      - db
+    
 
   web:
     image: nginx
